@@ -28,7 +28,7 @@
             <div class="col-md-4">
                <div class="withdraw status">
                 <h5>Withdraw</h5>
-                <h2>$ 00</h2>
+                <h2>$ <span id="currentWithdraw">00</span></h2>
                </div>
             </div>
             <div class="col-md-4">
@@ -69,8 +69,6 @@
         depositBtn.addEventListener("click", function(){
             const depositNumber =getInputNumber("depositAmount");
                 console.log(depositNumber);
-         
-    
             // const currentDeposit = document.getElementById("currentDeposit").innerText; //h1, ba li ba span tag er vitorer jinis newar jonno innerText ba khetro bises a innerHtml bebohar kore
             // const currentDepositNumber = parseFloat(currentDeposit);
             // const totalDeposit = depositNumber + currentDepositNumber;
@@ -93,19 +91,22 @@
             withdrawBtn.addEventListener("click", function(){
                 const withdrawNumber =getInputNumber("withdrawAmount");
                 console.log(withdrawNumber);
-        })
+                updateSpanText("currentWithdraw", withdrawNumber);
+                updateSpanText("currentBalance",-1 * withdrawNumber);
 
+                document.getElementById("withdrawAmount").value = "";
+
+        })
             function getInputNumber(id){
                 const Amount = document.getElementById(id).value; //input er vitorer jinis newar jonno value use kore
                 const amountNumber = parseFloat(Amount);
                 return amountNumber;
             }
 
-
-            function updateSpanText(id, depositNumber ){
+            function updateSpanText(id, addedNumber ){
                 const current = document.getElementById(id).innerText;
                 const currentNumber = parseFloat(current);
-                const totalAmount = depositNumber + currentNumber;
+                const totalAmount = addedNumber + currentNumber;
                 document.getElementById(id).innerText = totalAmount;
             }
   
